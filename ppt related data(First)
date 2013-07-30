@@ -1,0 +1,440 @@
+
+JQuery
+
+2 
+
+What is jQuery? 
+•JavaScript Library 
+
+
+ 
+
+•Functionality 
+–DOM scripting & event handling 
+–Ajax 
+–User interface effects 
+–Form validation 
+
+
+
+
+ 
+
+
+3 
+Why jQuery? 
+•Lightweight – 14kb (Minified and 
+Gzipped) 
+•Cross-browser support (IE 6.0+, FF 
+1.5+, Safari 2.0+, Opera 9.0+) 
+•CSS-like syntax – easy for 
+developers/non-developers to 
+understand 
+•Active developer community 
+•Extensible - plugins 
+
+
+
+JQuery 
+
+•Powerful JavaScript library 
+–Simplify common JavaScript tasks 
+–Access parts of a page 
+•using CSS or XPath-like expressions 
+
+
+–Modify the appearance of a page 
+–Alter the content of a page 
+–Change the user’s interaction with a page 
+–Add animation to a page 
+–Provide AJAX support 
+–Abstract away browser quirks 
+
+
+
+
+
+5 
+
+Example – Show/Hide the old way 
+<a href="#" onclick="toggle_visibility('foo');">Click here to toggle 
+visibility of #foo</a> 
+
+ 
+
+function toggle_visibility(id) { 
+
+ var e = document.getElementById(id); 
+
+ if(e.style.display == 'block') 
+
+ e.style.display = 'none'; 
+
+ else 
+
+ e.style.display = 'block'; 
+
+ } 
+
+
+6 
+Example – Show/Hide with jQuery 
+
+
+$().ready(function(){ 
+
+ $("a").click(function(){ 
+
+ $("#more").toggle("slow"); 
+
+ return false; 
+
+ }); 
+
+ }); 
+
+ 
+
+
+Introductory Sample 
+
+<html> 
+
+<body> 
+
+<h1>Cities of the World</h1> 
+
+<dl> 
+
+<dt>Paris</dt><dd>Chic, 
+fashionable, expensive 
+rude</dd> 
+
+<dt>Sydney</dt><dd>Opera 
+house but no culture, Mardi 
+Gras, fireworks</dd> 
+
+</dl> 
+
+</body> 
+
+</html> 
+
+h1 {font-size: 2.5em; 
+margin-bottom: 0;} 
+
+ 
+
+.emphasize {font-style: 
+italic; color:red;} 
+
+ 
+
+SafariScreenSnapz003
+
+Basic JQuery 
+•Selecting part of document is 
+fundamental operation 
+•A JQuery object is a wrapper for a 
+selected group of DOM nodes 
+•$() function is a factory method that 
+creates JQuery objects 
+•$(“dt”) is a JQuery object containing all 
+the “dt” elements in the document 
+
+
+
+Basic JQuery 
+•.addClass() method changes the DOM nodes 
+by adding a ‘class’ attribute 
+–The ‘class’ attribute is a special CSS construct that 
+provides a visual architecture independent of the 
+element structures 
+
+
+•$(“dt”).addClass(“emphasize”) will change all 
+occurrences of <dt> to 
+<dt class=“emphasize”> 
+•See also .removeClass() 
+
+
+
+Basic JQuery 
+
+•To make this change, put it in a function and 
+call it when the document has been loaded 
+and the DOM is created 
+
+
+function doEmph(){$(“dt”).addClass(“emphasize”)} 
+
+<body onLoad=“doEmph()”> 
+
+•We had to alter the HTML (bad) 
+•Structure and appearance should be 
+separated! 
+•Also, onLoad waits until all images etc are 
+loaded. Tedious. 
+
+
+
+Basic JQuery 
+
+•JQuery provides an independent scheduling 
+point after DOM is created and before images 
+are loaded 
+–$(document).ready(doEmph); 
+
+
+•No HTML mods required. All done in script. 
+•Better solution: 
+–$(document).ready(function(){ 
+
+
+
+
+$(“dt”).addClass(“emphasize”) 
+
+ }); 
+
+<html><head> 
+<script src="jquery.js" type="text/javascript"></script> 
+<script src="test.js" type="text/javascript"></script> 
+… 
+JQuery Selectors 
+•CSS 
+
+
+p element name 
+
+#id identifier 
+
+.class classname 
+
+p.class element with class 
+
+p a anchor as any descendant of p 
+
+p > a anchor direct child of p 
+
+
+JQuery Selectors 
+•XPath 
+
+
+/html/body//div paths 
+
+a[@href] anchor with an href attr 
+
+div[ol] div with an ol inside 
+
+//a[@ref='nofollow'] any anchor with a 
+specific value for the ref attribute 
+
+
+JQuery Filters 
+p:first first paragraph 
+
+li:last last list item 
+
+a:nth(3) fourth link 
+
+a:eq(3) fourth link 
+
+p:even or p:odd every other paragraph 
+
+a:gt(3) or a:lt(4) every link after the 4th or 
+up to the fourth 
+
+a:contains(‘click’) links that contain the 
+word click 
+
+
+Example 
+
+•JQuery uses chaining as follows 
+
+
+$(‘a:contains("ECS")’).parent().addClass("emphasize") 
+
+ 
+
+
+JQuery Events 
+•bind(eventname, function) method 
+–‘click’ 
+–‘change’ 
+–‘resize’ 
+
+
+•$(“a[@href]”).bind(‘click’,function(){ 
+$(this).addClass(‘red’);}); 
+
+
+
+Other JQuery Effects 
+•.css(‘property’, ‘value’) 
+•.css({‘prop1’:‘value1’, ‘prop2’:’value2’…}) 
+•E.g. .css(‘color’, ‘red’) 
+•.hide(speed) or .show(speed) 
+–Where speed is ‘slow’, ‘normal’ or ‘fast’ 
+
+
+
+
+
+More JQuery Changes DOM 
+•.attr({‘name’, ‘value’}) 
+–sets a new attribute (or many) 
+
+
+•$(‘<i>hello</i>’) 
+–Creates a new element 
+
+
+•$(‘<i>hello</i>’).insertAfter(‘div.chapter p’); 
+–Creates element and inserts it into the document 
+
+
+•.html() or .text() or .empty() will replace matched 
+elements with newly created elements 
+
+
+
+19 
+
+Example – Show/Hide the old way 
+
+<a href="#" onclick="toggle_visibility('foo');">Click here to 
+toggle visibility of #foo</a> 
+
+ 
+
+function toggle_visibility(id) { 
+
+ var e = document.getElementById(id); 
+
+ if(e.style.display == 'block') 
+
+ e.style.display = 'none'; 
+
+ else 
+
+ e.style.display = 'block'; 
+
+ } 
+
+
+20 
+Example – Show/Hide with jQuery 
+
+
+$().ready(function(){ 
+
+ $("a").click(function(){ 
+
+ $("#more").toggle("slow"); 
+
+ return false; 
+
+ }); 
+
+ }); 
+
+ 
+
+
+21 
+Example – Ajax the old way 
+function GetXmlHttpObject(handler) { 
+
+ var objXmlHttp = null; //Holds the local xmlHTTP object instance 
+
+ 
+
+ //Depending on the browser, try to create the xmlHttp object 
+
+ if (is_ie){ 
+
+ var strObjName = (is_ie5) ? 'Microsoft.XMLHTTP' : 'Msxml2.XMLHTTP'; 
+
+ try{ 
+
+ objXmlHttp = new ActiveXObject(strObjName); 
+
+ objXmlHttp.onreadystatechange = handler; 
+
+ } 
+
+ catch(e){ 
+
+ //Object creation errored 
+
+ alert('Verify that activescripting and activeX controls are enabled'); 
+
+ return; 
+
+ } 
+
+ } 
+
+ else{ 
+
+ // Mozilla | Netscape | Safari 
+
+ objXmlHttp = new XMLHttpRequest(); 
+
+ objXmlHttp.onload = handler; 
+
+ objXmlHttp.onerror = handler; 
+
+ } 
+
+ //Return the instantiated object 
+
+ return objXmlHttp; 
+
+} 
+
+
+22 
+
+Example – Ajax with jQuery 
+
+ 
+
+$.get(“controller/actionname", { name: "John", time: "2pm" }, 
+function(data){ alert("Data Loaded: " + data); }); 
+
+$.post(“controller/actionname", { name: "John", time: "2pm" }, 
+function(data){ alert("Data Loaded: " + data); }); 
+
+ 
+
+ 
+
+
+23 
+Example – Form Validation 
+
+$().ready(function() 
+
+{ 
+
+// validate the comment form when it is submitted 
+
+$("#commentForm").validate(); 
+
+}); 
+
+<input id="cname" name="name" class="some other styles {required:true,minLength:2}" /> 
+
+<input id="cemail" name="email" class="{required:true,email:true}" /> 
+
+
+Questions? 
+Thank You 
+Thank You
+
+
+
