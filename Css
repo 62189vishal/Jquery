@@ -1,0 +1,141 @@
+*******************************
+<link   type="text/css" 		href="styles/demos.css" 					rel="stylesheet" />
+<style type="text/css">
+  body
+	{ 
+		font: 75% "Trebuchet MS", sans-serif;
+		margin: 50px;
+	}
+	.bodystyle
+	{ 
+		font: 75% "Trebuchet MS", sans-serif;
+	}
+	#dialog_link
+	{
+		padding: .4em 1em .4em 20px;
+		text-decoration: none;
+		position: relative;
+	}
+	#dialog_link span.ui-icon
+	{
+		margin: 0 5px 0 0;
+		position: absolute;
+		left: .2em;
+		top: 50%;
+		margin-top: -8px;
+	}
+	ul#icons
+	{
+		margin: 0;
+		padding: 0;
+	}
+	ul#icons li
+	{
+		margin: 2px; 
+		position: relative; 
+		padding: 4px 0; 
+		cursor: pointer; 
+		float: left;  
+		list-style: none;
+	}
+	ul#icons span.ui-icon
+	{
+		float: left; 
+		margin: 0 4px;
+	}
+	.demoHeaders
+	{
+		margin-top: 2em;
+	}
+	div.demoTitle
+	{
+		text-align : center;
+		font-size  : 1.5em;
+	}
+	div.content
+	{
+		margin : 20px;
+	}
+	span.exampleSelector
+	{
+		text-decoration : underline;
+	}
+	span.button
+	{
+	    background-color: #98BF21;
+	    border			: 1px solid #FFFFFF;
+	    color			: #FFFFFF;
+	    display			: block;
+	    font-size		: 12px;
+	    font-weight		: bold;
+	    margin-left		: 1px;
+	    outline			: 1px solid #98BF21;
+	    padding			: 3px 0 4px;
+	    text-align		: center;
+	    text-decoration	: none;
+	    width			: 120px;
+	}
+	.red
+	{
+		border-style 	 : solid;
+		border-width 	 : 2px;
+		border-color 	 : #BB0000;
+		fill-style	 	 : solid;
+		background-color : #FF7777;
+	}
+	
+	.blue
+	{
+		border-style 	 : dashed;
+		border-width 	 : 2px;
+		border-color 	 : #0000BB;
+		fill-style	 	 : solid;
+		background-color : #7777FF;
+	}
+	.style1
+	{
+		border-width : 2px;
+		border-style : solid;
+		border-color : red;
+	}
+</style>
+**********************************
+  	<link 	type="text/css" 		href="styles/overridingjqueryuistyles.css" 	rel="stylesheet" />
+<!-- Overriding jQuery UI widget styles -->
+<style type="text/css">
+  div.ui-tabs-panel 
+	{
+	    font-size 		 : 1em;
+	    font-family 	 : arial
+	}
+	li.ui-tabs-selected
+	{
+	    color			 : #98BF21;
+	    background-color : #98BF21
+	}
+	li.ui-state-active
+	{
+	    color			 : #98BF21;
+	    background-color : #98BF21
+	}
+	li.ui-state-focus
+	{
+	    color			 : #98BF21;
+	    background-color : #98BF21
+	}
+	ul.ui-tabs-nav
+	{
+	    color			 : #98BF21;
+	    background-color : #98BF21
+	}
+	ul.ui-helper-reset
+	{
+	    color			 : #98BF21;
+	    background-color : #98BF21
+	}
+	ul.ui-widget-header
+	{
+	    color			 : #98BF21;
+	    background-color : #98BF21
+	}
+</style>
