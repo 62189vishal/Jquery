@@ -1,0 +1,299 @@
+
+*************************************
+<script type="text/javascript"   src="scripts/example1.js">	</script>
+
+/* 
+ * Example 1 : Using JavaScript
+ */ 
+function replaceWithNil()
+{
+  var elements = document.getElementsByTagName( "input" );
+	for( var i = 0; i < elements.length; i++ )
+		if( elements[i].type == "text" && elements[i].value == "-" )
+			elements[i].value = "Nil";
+}
+
+/*
+ * Example 1 : Using jQuery 
+ */ 
+function example1()
+{
+	$( "#btn1" ).click( function() {						// When the btn with id 'btn1' is clicked, execute the function
+		$( "input[type='text'][value='-']" ).val( "Nil" );	// Choose all text boxes with value '-' and replace with 'Nil'
+	});
+}
+
+************************************
+
+
+
+************************************
+		<script type="text/javascript" 	src="scripts/example2.js">	</script>
+    ************************************
+    
+  /*
+ * Example 2
+ */ 
+function example2()
+{
+  $( "a#jquery" ).click( function(e) { 	// e is the event object
+		var choice = confirm( "You are about to visit the official website for jQuery" );
+		if( !choice )
+			e.preventDefault();				// prevents default handling for the event (thus preventing loading of new page on click of the link)
+	} );
+}
+    
+    ************************************
+    
+		<script type="text/javascript" 	src="scripts/example3.js">	</script>
+     ************************************
+    
+    /*
+ * Example 3
+ */ 
+function example3()
+{
+  $( "#chSelector" ).bind( "change", function selectElements() {
+		var selObj = $(this).get(0);	// get( index ) gets the JavaScript DOM object from equivalent jQuery object at specified index in list of jQuery objects
+		$( "*" ).removeClass( "style1" );
+		eval( selObj.options[selObj.selectedIndex].text ).addClass( "style1" );
+		$( "span#selectorDesc" ).html( selObj.options[selObj.selectedIndex].value );
+	});
+	$( "#btnSelect" ).bind( "click", function() {
+		$( "*" ).removeClass( "style1" );
+		eval( $(this).prev( "input" ).val() ).addClass( "style1" );
+	});
+}
+    ************************************
+    
+		<script type="text/javascript" 	src="scripts/example4.js">	</script>
+     ************************************
+    
+   /*
+ * Example 4
+ */ 
+function example4()
+{
+  $( '#btnSetHTML' ).add( "#btnSetHTMLPreserve" ).add( "#btnSetAttribute" ).add( "#btnAppendDiv" ).poshytip();
+
+	// html() is used to set the innerHTML and cannot be applied on textbox, textarea etc.
+	// val() gets the value of elements like textbox, textarea, button etc. It cannot be applied on div, span etc.
+	$( "#btnSetHTML" ).click( function() {
+		$( "div.outerElement .innerElement" ).html( "<input type=text value='just inserted'/>" );	// Observe that for each node matched, the innerHTML is set
+		// Note that we cannot use this.val() as val() is a jQuery object method and cannot be applied on a DOM object.
+		// Thus we retrieve the corresponding jQuery object using $(this)
+		alert( "value for the clicked button = " + $(this).val() );
+		$(this).val( "This button has been clicked" );
+	});
+
+	// text() functions preserves markup
+	$( "#btnSetHTMLPreserve" ).click( function() {
+		$( "div.outerElement span" ).text( "<b>This is being created on the fly</b>" );
+	});
+	
+	// The attr() and each() methods
+	$( "#btnSetAttribute"	 ).click( function() {
+		alert( "id attribute for div = " + $( "div.outerElement div" ).add( $( "div.outerElement p" ) ).attr( "id" ) );	// Only first element matched has attribute 'class' returned
+		// each() function is used to apply the attr() method to each matched node. 
+		// Here index is an optional parameter to the anonymous function
+		// add() function implements the set union operator on sets of matched nodes
+		$( "div.outerElement div" ).add( "div.outerElement p" ).each( function( index ) { 
+			alert( "id attribute for matched node " + index + " = " + $(this).attr( "id" ) );		 
+		});
+		$( "div.outerElement span" ).attr( "class", "innerElement" );	// Set attribute class for <span>
+		alert( "class attribute for span was set to '" + $( "div.outerElement span" ).attr( "class" ) +"'" );	// Get the attribute just set
+		// The attr() method can also be used to set multiple attributes simultaneously using the following syntax - attr( { attr_1 : value_1, attr_2 : value_2, ... } )
+	});
+	
+	// The appendTo() method
+	$( "#btnAppendDiv" ).click( function() {
+		$( 
+			"<div/>", 
+			{ 
+				id 		  : "test", 
+				css 	  : { height : "100px", width : "100px", backgroundColor : "cyan" },
+				mouseover : function() {
+					$(this).css( { "backgroundColor" : "silver", "right" : "+=100px" } );	// CSS manipulation will be covered in detail in the next example
+				}
+			} 
+		 ).appendTo( $( "div.outerElement" ) );
+	});
+}
+   
+    ************************************
+    
+		<script type="text/javascript" 	src="scripts/example5.js">	</script>
+    
+     ************************************
+    
+   /*
+ * Example 5
+ */
+function example5()
+{
+  $( '#Example5 div.content span.button' ).poshytip();
+	
+	// CSS manipulation
+	$( "#btnAddStyle" ).click( function() {
+		$( this ).parent().find( "p" ).css( "background-color", "red" );	// This query is written in complex fashion to demonstrate the use of parent() [parent node jQuery object] and find() [it gets descendant nodes using given selector]
+		// $( this ).parent().find( "p" ).css( "right", "+=100px" );
+	});
+	
+	$( "#btnAddStyleClass" ).click( function() {
+		$( "div#Example5 div.content p" ).removeAttr( "style" );
+		$( "div#Example5 div.content p" ).addClass( "red" );
+	});
+
+	$( "#btnRemoveStyleClass" ).click( function() {
+		$( "div#Example5 div.content p" ).removeAttr( "style" );
+		$( "div#Example5 div.content p" ).removeClass( "red" ).addClass( "blue" );
+	});
+	
+	$( "#btnToggleStyleClass" ).click( function() {
+		$( "div#Example5 div.content div" ).toggleClass( "blue" );
+	});
+	
+	$( "#btnAnimate" ).click( function() {
+		$( "div#Example5 div.content div" ).animate( 
+				{ 
+					width: "70%",
+					opacity: 0.4,
+					marginLeft: "15%",
+					fontSize: "3em",
+					borderWidth: "10px"
+				}, "slow" ).slideUp( "fast" ).slideDown( "slow" );
+		return false;
+	});
+
+}
+    
+    ************************************
+    
+		<script type="text/javascript" 	src="scripts/example6.js">	</script>
+    
+    
+    /*
+ * Example 6
+ */
+function example6()
+{
+  setupTabs();
+	setupAccordion();
+	setupAutocomplete();
+	setupDatepicker();
+	setupSlider();
+	setupButton();
+}
+
+function setupTabs()
+{
+	$( "#tabs" ).tabs
+	({
+		selected : 0,
+		disabled : [2],
+		fx : { opacity : "toggle", duration : "slow" },
+		select : function( event, ui )
+		{
+			alert( $( ui.panel ).attr( "id" ) );
+		}
+	});
+	$( "#toggleTabState" ).click( function() {
+		if( this.value == "Enable jQuery Mobile tab" )
+		{
+			$( "#tabs" ).tabs( { disabled : [] } );
+			this.value = "Disable jQuery Mobile tab";
+		}
+		else
+		{
+			$( "#tabs" ).tabs( "disable", 2 );
+			this.value = "Enable jQuery Mobile tab";
+		}
+	});
+	$( "#addTab" ).click( function() {
+		$( "#tabs" ).tabs( "add", "#tabs-w3schools", "w3schools.com" );
+	});
+	$( "#tabs" ).bind( "tabsshow", function( event, ui ) {
+		alert( $( ui.tab ).html() );
+	});
+}
+
+function setupAccordion()
+{
+	$("#accordion").accordion
+	({ 
+			header: "h3",
+			autoHeight: true,
+			fillSpace: true
+			
+	});
+	// The following is a workaround to set the height of an accordion node since autoHeight and fillSpace don't work as intended (or I have understood them incorrectly)
+	// Ignore this
+	$( "div#accordionKey" ).height( "100px" );
+}
+
+function setupAutocomplete()
+{
+	$( '#txtBU' ).add( "#txtDC" ).poshytip( 
+	{
+		className	: 'tip-twitter',
+		showOn		: 'focus',
+		alignTo		: 'target',
+		alignX		: 'right',
+		alignY		: 'center',
+		offsetX		: 10
+	});
+	
+	$( "#txtBU" ).autocomplete({
+		source: [ "E&R", "PRD", "IVS" ]
+	});
+	
+	$( "#txtDC" ).autocomplete({
+		source: [ "Bangalore", "Bhubaneshwar", "Chandigarh", "Chennai", "Hyderabad", "Mangalore", "Mysore", "Pune", "Trivandrum"]
+	});
+}
+
+function setupDatepicker()
+{	
+	$( "#txtEnd" ).poshytip( 
+	{
+		className	: 'tip-twitter',
+		showOn		: 'focus',
+		alignTo		: 'target',
+		alignX		: 'right',
+		alignY		: 'center',
+		offsetX		: 10
+	});
+	// Note that id for the textbox has to be 'date' to datepicker to work
+	// We will assume feedback can only be given for a course conducted in the past 90 days
+	// Note that even though 4 digits of year are to be displayed the format string is "dd/mm/yy" and NOT "dd/mm/yyyy"
+	$( "input#txtStart" ).datepicker( { dateFormat : "dd/mm/yy", minDate : -90, maxDate : 0, changeMonth : true, changeYear : true } );
+	$( "input#txtEnd"   ).datepicker( { dateFormat : "dd/mm/yy", minDate : -90, maxDate : 0, changeMonth : true, changeYear : true } ).datepicker( "setDate", "0" );
+}
+
+function setupSlider()
+{
+	// Slider
+	
+	$( "div[id*='Slider']" ).slider
+	(
+		{ 
+			value 	: 3,
+			min 	: 1,
+			max		: 5,
+			step	: 1,
+			slide	: function( event, ui ) {
+				$(this).parent().next().find( "span[id*='ratingValue']" ).html( "<b>" + ui.value + "</b>" );
+			}
+		}
+	);
+
+	// Set initial value for each span corresponding to the default in the respective slider
+	$( "span[id*='ratingValue']" ).each( function() {
+		$(this).html( "<b>" + $( this ).parent().prev().find( "div[id*='Slider']" ).slider( "value" ) + "</b>" );
+	});
+}
+
+function setupButton()
+{
+	$( "#button" ).button();
+}
